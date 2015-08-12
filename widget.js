@@ -5,7 +5,11 @@ define([
 	return Widget.extend({
 		"sig/start": function() {
 			var me = this;
-			return me.html(markdown.toHTML(me.$element.text()));
+			var $el = me.$element;
+			var $pre;
+			// take the first <pre> element as vehicle for transporting markdown
+			var text = ($pre = $el.find('>pre')).length ? $pre.text() : $el.text();
+			return me.html(markdown.toHTML(text));
 		}
 	})
 });
